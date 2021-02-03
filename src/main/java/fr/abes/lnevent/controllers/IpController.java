@@ -76,7 +76,7 @@ public class IpController {
         return "done";
     }
 
-    @PostMapping(value = "/listIpParSiren/{siren}")
+    @GetMapping(value = "/listIpParSiren/{siren}")
     public List<IpRow> getIpBySiren(@PathVariable String siren) {
         return ipRepository.findAllBySiren(siren);
     }
