@@ -19,7 +19,8 @@ public class IpAjouteeListener implements ApplicationListener<IpAjouteeEvent> {
     public void onApplicationEvent(IpAjouteeEvent ipAjouteeEvent) {
         IpRow ipRow = new IpRow(null,
                 ipAjouteeEvent.getIp(),
-                ipAjouteeEvent.getSiren());
+                ipAjouteeEvent.getSiren(),
+                ipAjouteeEvent.getDateAjout());
         ipRepository.save(ipRow);
     }
 }

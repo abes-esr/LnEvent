@@ -9,16 +9,16 @@ import fr.abes.lnevent.event.ip.IpModifieeEvent;
 import fr.abes.lnevent.event.ip.IpSupprimeeEvent;
 import fr.abes.lnevent.event.ip.IpValideeEvent;
 import fr.abes.lnevent.repository.EventRepository;
+import fr.abes.lnevent.repository.IpRepository;
 import fr.abes.lnevent.repository.entities.EventRow;
-import fr.abes.lnevent.services.ArbreService;
-import fr.abes.lnevent.services.ResetService;
+import fr.abes.lnevent.repository.entities.IpRow;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Log
 @RestController
@@ -31,16 +31,14 @@ public class IpController {
     private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
-    private ResetService resetService;
-
-    @Autowired
-    private ArbreService arbreService;
+    private IpRepository ipRepository;
 
     @PostMapping(value = "/ajout")
     public String ajoutIp(@RequestBody IpAjouteeDTO event) {
         IpAjouteeEvent ipAjouteeEvent = new IpAjouteeEvent(this,
                 event.getIp(),
-                event.getSiren());
+                event.getSiren(),
+                new Date());
         applicationEventPublisher.publishEvent(ipAjouteeEvent);
         repository.save(new EventRow(ipAjouteeEvent));
 
@@ -76,6 +74,11 @@ public class IpController {
         applicationEventPublisher.publishEvent(ipSupprimeeEvent);
         repository.save(new EventRow(ipSupprimeeEvent));
         return "done";
+    }
+
+    @PostMapping(value = "/listIpParSiren/{siren}")
+    public List<IpRow> getIpBySiren(@PathVariable String siren) {
+        return ipRepository.findAllBySiren(siren);
     }
 
 

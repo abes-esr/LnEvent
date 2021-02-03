@@ -13,11 +13,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.List;
 
 @Document(collection = "Event")
 @NoArgsConstructor
 public class EventRow {
+
+
 
     public EventRow(EtablissementCreeEvent etablissementCreeEvent) {
         this.event = "cree";
@@ -95,6 +98,7 @@ public class EventRow {
         this.event = "ipAjoute";
         this.ip = ipAjouteeEvent.getIp();
         this.siren = ipAjouteeEvent.getSiren();
+        this.dateAjout = ipAjouteeEvent.getDateAjout();
     }
 
     public EventRow(IpModifieeEvent ipModifieeEvent) {
@@ -149,6 +153,8 @@ public class EventRow {
     public List<String> etablissementsFusionne;
 
     public String ip;
+
+    public Date dateAjout;
 
     public String siren;
 
