@@ -26,7 +26,9 @@ public class Editeur {
 
     public String adresse;
 
+    @ElementCollection(targetClass=String.class)
     public List<String> mailsPourBatch;
 
+    @ElementCollection(targetClass=String.class)
     public List<String> mailPourInformation;
 }
