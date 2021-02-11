@@ -93,10 +93,10 @@ public class LnConfig
 
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.show-sql", env.getProperty("spring.jpa.show-sql"));
-        //jpaProperties.put("javax.persistence.schema-generation.create-source", "metadata");
-        //jpaProperties.put("javax.persistence.schema-generation.scripts.action", "drop-and-create");
-        //jpaProperties.put("javax.persistence.schema-generation.scripts.create-target", "./create.sql");
-        //jpaProperties.put("javax.persistence.schema-generation.scripts.drop-target", "./drop.sql");
+        jpaProperties.put("javax.persistence.schema-generation.create-source", "metadata");
+        jpaProperties.put("javax.persistence.schema-generation.scripts.action", "drop-and-create");
+        jpaProperties.put("javax.persistence.schema-generation.scripts.create-target", "./create.sql");
+        jpaProperties.put("javax.persistence.schema-generation.scripts.drop-target", "./drop.sql");
 
         factory.setJpaProperties(jpaProperties);
 
