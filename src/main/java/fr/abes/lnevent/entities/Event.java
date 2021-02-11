@@ -148,8 +148,10 @@ public class Event {
 
     public EtablissementDTO etablissementFusion;
 
+    @ElementCollection(targetClass=String.class)
     public List<EtablissementDTO> etablissementsDivise;
 
+    @ElementCollection(targetClass=String.class)
     public List<String> etablissementsFusionne;
 
     public String ip;
@@ -160,10 +162,13 @@ public class Event {
 
     private String adresseEditeur;
 
+    @ElementCollection(targetClass=String.class)
     private List<String> mailPourBatchEditeur;
 
+    @ElementCollection(targetClass=String.class)
     private List<String> mailPourInformationEditeur;
 
+    @ElementCollection(targetClass=String.class)
     private List<String> idEditeurFusionnes;
 
 
