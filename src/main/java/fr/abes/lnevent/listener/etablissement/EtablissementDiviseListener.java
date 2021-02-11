@@ -1,9 +1,9 @@
 package fr.abes.lnevent.listener.etablissement;
 
-import fr.abes.lnevent.dto.etablissement.Etablissement;
+import fr.abes.lnevent.dto.etablissement.EtablissementDTO;
 import fr.abes.lnevent.repository.ContactRepository;
-import fr.abes.lnevent.repository.entities.ContactRow;
-import fr.abes.lnevent.repository.entities.EtablissementRow;
+import fr.abes.lnevent.entities.Contact;
+import fr.abes.lnevent.entities.Etablissement;
 import fr.abes.lnevent.repository.EtablissementRepository;
 import fr.abes.lnevent.event.etablissement.EtablissementDiviseEvent;
 import org.springframework.context.ApplicationListener;
@@ -24,17 +24,17 @@ public class EtablissementDiviseListener implements ApplicationListener<Etabliss
     public void onApplicationEvent(EtablissementDiviseEvent etablissementDiviseEvent) {
         etablissementRepository.deleteBySiren(etablissementDiviseEvent.getAncienSiren());
         contactRepository.deleteBySiren(etablissementDiviseEvent.getAncienSiren());
-        for (Etablissement etablissementDivise :
+        for (EtablissementDTO etablissementDivise :
                 etablissementDiviseEvent.getEtablissements()) {
-            etablissementRepository.save(new EtablissementRow(null,
+            etablissementRepository.save(new Etablissement(null,
                     etablissementDivise.getNom(),
                     etablissementDivise.getAdresse(),
                     etablissementDivise.getSiren(),
                     etablissementDivise.getTypeEtablissement(),
                     etablissementDivise.getIdAbes()));
 
-            ContactRow contactRow =
-                    new ContactRow(null,
+            Contact contact =
+                    new Contact(null,
                             etablissementDivise.getNomContact(),
                             etablissementDivise.getPrenomContact(),
                             etablissementDivise.getMailContact(),
@@ -43,7 +43,7 @@ public class EtablissementDiviseListener implements ApplicationListener<Etabliss
                             etablissementDivise.getAdresseContact(),
                             etablissementDivise.getSiren());
 
-            contactRepository.save(contactRow);
+            contactRepository.save(contact);
         }
     }
 }

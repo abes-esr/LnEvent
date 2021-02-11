@@ -1,8 +1,8 @@
 package fr.abes.lnevent.services;
 
-import fr.abes.lnevent.dto.etablissement.Etablissement;
-import fr.abes.lnevent.repository.entities.EventRow;
-import fr.abes.lnevent.repository.entities.IpRow;
+import fr.abes.lnevent.dto.etablissement.EtablissementDTO;
+import fr.abes.lnevent.entities.Event;
+import fr.abes.lnevent.entities.Ip;
 import fr.abes.lnevent.repository.EventRepository;
 import fr.abes.lnevent.repository.IpRepository;
 import org.springframework.stereotype.Service;
@@ -21,31 +21,31 @@ public class ArbreService {
 
     public String genereArbre() {
         StringBuilder builder = new StringBuilder();
-        for (EventRow eventRow :
+        for (Event event :
                 eventRepository.findAll()) {
-            switch (eventRow.event) {
+            switch (event.event) {
                 case "cree":
-                    builder.append("Nouveau : ").append(eventRow.nomEtab).append("\n");
-                    List<IpRow> ips = ipRepository.findAllBySiren(eventRow.siren);
-                    for (IpRow ipRow :
+                    builder.append("Nouveau : ").append(event.nomEtab).append("\n");
+                    List<Ip> ips = ipRepository.findAllBySiren(event.siren);
+                    for (Ip ip :
                             ips) {
-                        builder.append(ipRow.ip).append("\n");
+                        builder.append(ip.ip).append("\n");
                     }
                     break;
                 case "supprime":
-                    builder.append("Supprimer : ").append(eventRow.nomEtab).append("\n");
+                    builder.append("Supprimer : ").append(event.nomEtab).append("\n");
                     break;
                 case "divise":
-                    builder.append("Divise : ").append(eventRow.ancienNomEtab).append("\n");
-                    for (Etablissement etab :
-                            eventRow.etablisementsDivise) {
+                    builder.append("Divise : ").append(event.ancienNomEtab).append("\n");
+                    for (EtablissementDTO etab :
+                            event.etablissementsDivise) {
                         builder.append(etab.getNom()).append("\n");
                     }
                     break;
                 case "fusionne":
-                    builder.append("Fusion : ").append(eventRow.nomEtab).append("\n");
+                    builder.append("Fusion : ").append(event.nomEtab).append("\n");
                     for (String etab :
-                            eventRow.etablissementsFusionne) {
+                            event.etablissementsFusionne) {
                         builder.append(etab).append("\n");
                     }
                     break;

@@ -1,12 +1,17 @@
-package fr.abes.lnevent.repository.entities;
+package fr.abes.lnevent.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
-@Document(collection = "Contact")
-public class ContactRow {
 
-    public ContactRow(String id,
+@Entity
+@Table(name = "CONTACT_LN_EVENT")
+@Getter
+@NoArgsConstructor
+public class Contact {
+
+    public Contact(String id,
                       String nom,
                       String prenom,
                       String mail,
@@ -25,6 +30,7 @@ public class ContactRow {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public String id;
 
     public String nom;

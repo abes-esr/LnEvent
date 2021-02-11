@@ -7,7 +7,7 @@ import fr.abes.lnevent.event.editeur.EditeurCreeEvent;
 import fr.abes.lnevent.event.editeur.EditeurFusionneEvent;
 import fr.abes.lnevent.event.editeur.EditeurModifieEvent;
 import fr.abes.lnevent.repository.EventRepository;
-import fr.abes.lnevent.repository.entities.EventRow;
+import fr.abes.lnevent.entities.Event;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -35,7 +35,7 @@ public class EditeurController {
                 editeurCreeDTO.getMailPourBatch(),
                 editeurCreeDTO.getMailPourInformation());
         applicationEventPublisher.publishEvent(editeurCreeEvent);
-        repository.save(new EventRow(editeurCreeEvent));
+        repository.save(new Event(editeurCreeEvent));
         return "done";
     }
 
@@ -47,7 +47,7 @@ public class EditeurController {
                 editeurModifieDTO.getMailPourBatch(),
                 editeurModifieDTO.getMailPourInformation());
         applicationEventPublisher.publishEvent(editeurModifieEvent);
-        repository.save(new EventRow(editeurModifieEvent));
+        repository.save(new Event(editeurModifieEvent));
         return "done";
     }
 
@@ -57,7 +57,7 @@ public class EditeurController {
                 editeurFusionneDTO.getEditeur(),
                 editeurFusionneDTO.getIdEditeurFusionnes());
         applicationEventPublisher.publishEvent(editeurFusionneEvent);
-        repository.save(new EventRow(editeurFusionneEvent));
+        repository.save(new Event(editeurFusionneEvent));
         return "done";
     }
 }

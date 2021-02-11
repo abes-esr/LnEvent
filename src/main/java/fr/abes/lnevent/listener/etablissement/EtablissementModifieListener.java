@@ -3,8 +3,8 @@ package fr.abes.lnevent.listener.etablissement;
 import fr.abes.lnevent.event.etablissement.EtablissementModifieEvent;
 import fr.abes.lnevent.repository.ContactRepository;
 import fr.abes.lnevent.repository.EtablissementRepository;
-import fr.abes.lnevent.repository.entities.ContactRow;
-import fr.abes.lnevent.repository.entities.EtablissementRow;
+import fr.abes.lnevent.entities.Contact;
+import fr.abes.lnevent.entities.Etablissement;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +22,8 @@ public class EtablissementModifieListener implements ApplicationListener<Etablis
 
     @Override
     public void onApplicationEvent(EtablissementModifieEvent etablissementModifieEvent) {
-        EtablissementRow etablissementRow =
-                new EtablissementRow(
+        Etablissement etablissement =
+                new Etablissement(
                         etablissementModifieEvent.getIdEtablissement(),
                         etablissementModifieEvent.getNom(),
                         etablissementModifieEvent.getAdresse(),
@@ -31,10 +31,10 @@ public class EtablissementModifieListener implements ApplicationListener<Etablis
                         etablissementModifieEvent.getTypeEtablissement(),
                         etablissementModifieEvent.getIdAbes());
 
-        etablissementRepository.save(etablissementRow);
+        etablissementRepository.save(etablissement);
 
-        ContactRow contactRow =
-                new ContactRow(null,
+        Contact contact =
+                new Contact(null,
                         etablissementModifieEvent.getNomContact(),
                         etablissementModifieEvent.getPrenomContact(),
                         etablissementModifieEvent.getMailContact(),
@@ -43,6 +43,6 @@ public class EtablissementModifieListener implements ApplicationListener<Etablis
                         etablissementModifieEvent.getAdresseContact(),
                         etablissementModifieEvent.getSiren());
 
-        contactRepository.save(contactRow);
+        contactRepository.save(contact);
     }
 }

@@ -2,7 +2,7 @@ package fr.abes.lnevent.listener.ip;
 
 import fr.abes.lnevent.event.ip.IpModifieeEvent;
 import fr.abes.lnevent.repository.IpRepository;
-import fr.abes.lnevent.repository.entities.IpRow;
+import fr.abes.lnevent.entities.Ip;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -17,9 +17,9 @@ public class IpModifieeListener implements ApplicationListener<IpModifieeEvent> 
 
     @Override
     public void onApplicationEvent(IpModifieeEvent ipModifieeEvent) {
-        IpRow ipRow = new IpRow(ipModifieeEvent.getId(),
+        Ip ip = new Ip(ipModifieeEvent.getId(),
                 ipModifieeEvent.getIp(),
                 ipModifieeEvent.getSiren());
-        ipRepository.save(ipRow);
+        ipRepository.save(ip);
     }
 }

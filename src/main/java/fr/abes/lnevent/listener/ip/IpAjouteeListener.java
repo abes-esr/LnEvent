@@ -1,6 +1,6 @@
 package fr.abes.lnevent.listener.ip;
 
-import fr.abes.lnevent.repository.entities.IpRow;
+import fr.abes.lnevent.entities.Ip;
 import fr.abes.lnevent.repository.IpRepository;
 import fr.abes.lnevent.event.ip.IpAjouteeEvent;
 import org.springframework.context.ApplicationListener;
@@ -17,9 +17,9 @@ public class IpAjouteeListener implements ApplicationListener<IpAjouteeEvent> {
 
     @Override
     public void onApplicationEvent(IpAjouteeEvent ipAjouteeEvent) {
-        IpRow ipRow = new IpRow(null,
+        Ip ip = new Ip(null,
                 ipAjouteeEvent.getIp(),
                 ipAjouteeEvent.getSiren());
-        ipRepository.save(ipRow);
+        ipRepository.save(ip);
     }
 }

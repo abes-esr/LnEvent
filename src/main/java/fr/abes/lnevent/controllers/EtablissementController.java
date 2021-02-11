@@ -5,7 +5,7 @@ import fr.abes.lnevent.dto.etablissement.EtablissementDiviseDTO;
 import fr.abes.lnevent.dto.etablissement.EtablissementFusionneDTO;
 import fr.abes.lnevent.dto.etablissement.EtablissementModifieDTO;
 import fr.abes.lnevent.event.etablissement.*;
-import fr.abes.lnevent.repository.entities.EventRow;
+import fr.abes.lnevent.entities.Event;
 import fr.abes.lnevent.repository.EventRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class EtablissementController {
                         eventDTO.getTelephoneContact(),
                         eventDTO.getAdresseContact());
         applicationEventPublisher.publishEvent(etablissementCreeEvent);
-        repository.save(new EventRow(etablissementCreeEvent));
+        repository.save(new Event(etablissementCreeEvent));
 
         return "done";
     }
@@ -62,7 +62,7 @@ public class EtablissementController {
                         eventDTO.getTelephoneContact(),
                         eventDTO.getAdresseContact());
         applicationEventPublisher.publishEvent(etablissementModifieEvent);
-        repository.save(new EventRow(etablissementModifieEvent));
+        repository.save(new Event(etablissementModifieEvent));
 
         return "done";
     }
@@ -72,7 +72,7 @@ public class EtablissementController {
         EtablissementFusionneEvent etablissementFusionneEvent
                 = new EtablissementFusionneEvent(this, eventDTO.getEtablissement(), eventDTO.getSirenFusionnes());
         applicationEventPublisher.publishEvent(etablissementFusionneEvent);
-        repository.save(new EventRow(etablissementFusionneEvent));
+        repository.save(new Event(etablissementFusionneEvent));
 
         return "done";
     }
@@ -82,7 +82,7 @@ public class EtablissementController {
         EtablissementDiviseEvent etablissementDiviseEvent
                 = new EtablissementDiviseEvent(this, eventDTO.getAncienSiren(), eventDTO.getEtablissements());
         applicationEventPublisher.publishEvent(etablissementDiviseEvent);
-        repository.save(new EventRow(etablissementDiviseEvent));
+        repository.save(new Event(etablissementDiviseEvent));
 
         return "done";
     }
@@ -92,7 +92,7 @@ public class EtablissementController {
         EtablissementSupprimeEvent etablissementSupprimeEvent
                 = new EtablissementSupprimeEvent(this, siren);
         applicationEventPublisher.publishEvent(etablissementSupprimeEvent);
-        repository.save(new EventRow(etablissementSupprimeEvent));
+        repository.save(new Event(etablissementSupprimeEvent));
 
         return "done";
     }

@@ -1,9 +1,9 @@
 package fr.abes.lnevent.listener.etablissement;
 
-import fr.abes.lnevent.dto.etablissement.Etablissement;
+import fr.abes.lnevent.dto.etablissement.EtablissementDTO;
 import fr.abes.lnevent.repository.ContactRepository;
-import fr.abes.lnevent.repository.entities.ContactRow;
-import fr.abes.lnevent.repository.entities.EtablissementRow;
+import fr.abes.lnevent.entities.Contact;
+import fr.abes.lnevent.entities.Etablissement;
 import fr.abes.lnevent.repository.EtablissementRepository;
 import fr.abes.lnevent.event.etablissement.EtablissementFusionneEvent;
 import org.springframework.context.ApplicationListener;
@@ -23,17 +23,17 @@ public class EtablissementFusionneListener implements ApplicationListener<Etabli
     @Override
     public void onApplicationEvent(EtablissementFusionneEvent etablissementFusionneEvent) {
 
-        Etablissement etablissementFusione = etablissementFusionneEvent.getEtablissement();
+        EtablissementDTO etablissementFusione = etablissementFusionneEvent.getEtablissement();
 
-        etablissementRepository.save(new EtablissementRow(null,
+        etablissementRepository.save(new Etablissement(null,
                 etablissementFusione.getNom(),
                 etablissementFusione.getAdresse(),
                 etablissementFusione.getSiren(),
                 etablissementFusione.getTypeEtablissement(),
                 etablissementFusione.getIdAbes()));
 
-        ContactRow contactRow =
-                new ContactRow(null,
+        Contact contact =
+                new Contact(null,
                         etablissementFusione.getNomContact(),
                         etablissementFusione.getPrenomContact(),
                         etablissementFusione.getMailContact(),
@@ -42,7 +42,7 @@ public class EtablissementFusionneListener implements ApplicationListener<Etabli
                         etablissementFusione.getAdresseContact(),
                         etablissementFusione.getSiren());
 
-        contactRepository.save(contactRow);
+        contactRepository.save(contact);
 
         for (String siren :
                 etablissementFusionneEvent.getSirenFusionne()) {

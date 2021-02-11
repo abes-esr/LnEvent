@@ -2,7 +2,7 @@ package fr.abes.lnevent.listener.editeur;
 
 import fr.abes.lnevent.event.editeur.EditeurCreeEvent;
 import fr.abes.lnevent.repository.EditeurRepository;
-import fr.abes.lnevent.repository.entities.EditeurRow;
+import fr.abes.lnevent.entities.Editeur;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class EditeurCreeListener implements ApplicationListener<EditeurCreeEvent
     @Override
     public void onApplicationEvent(EditeurCreeEvent editeurCreeEvent) {
 
-        EditeurRow editeurRow = new EditeurRow(null,
+        Editeur editeurRow = new Editeur(null,
                 editeurCreeEvent.getNom(),
                 editeurCreeEvent.getAdresse(),
                 editeurCreeEvent.getMailPourBatch(),
