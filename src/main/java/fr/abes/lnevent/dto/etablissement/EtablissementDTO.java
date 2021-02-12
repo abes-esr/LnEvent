@@ -1,8 +1,10 @@
 package fr.abes.lnevent.dto.etablissement;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class EtablissementDTO {
 
     private String nom;
@@ -15,8 +17,6 @@ public class EtablissementDTO {
 
     private String idAbes;
 
-    private String mailContact;
-
     private String motDePasse;
 
     private String nomContact;
@@ -24,6 +24,8 @@ public class EtablissementDTO {
     private String prenomContact;
 
     private String telephoneContact;
+
+    private String mailContact;
 
     private String adresseContact;
 

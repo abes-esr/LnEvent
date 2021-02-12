@@ -146,7 +146,7 @@ public class Event {
 
     public String ancienNomEtab;
 
-    @Convert(converter = EtablissementDTOConverter.class)
+    @Convert(converter = EtablissementDtoConverter.class)
     public EtablissementDTO etablissementFusion;
 
     @ElementCollection(targetClass=String.class)
