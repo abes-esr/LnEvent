@@ -1,0 +1,23 @@
+FROM maven:3-jdk-11 as build
+WORKDIR /applis
+COPY pom.xml .
+COPY src ./
+#RUN mvn -Dmaven.test.skip=true clean package
+RUN mvn -Dmaven.test.skip=true clean package spring-boot:repackage
+##RUN mvn -f pom.xml clean package
+#RUN mkdir -p target/dependency && (cd target/dependency; jar -xf /applis/web/target/*.jar)
+
+FROM openjdk:11 as back-server
+#RUN addgroup -S spring && adduser -S spring -G spring
+#ARG DEPENDENCY=/applis/web/target/dependency
+#COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /applis/lib
+#COPY --from=build ${DEPENDENCY}/META-INF /applis/META-INF
+#COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /applis
+#ENTRYPOINT ["java","-cp","applis:applis/lib/*","FULL_NAME_OF_SPRING_BOOT_MAIN_CLASS"]
+COPY --from=build /applis/target/*.jar /applis/target/licences-nationales.jar
+#COPY --from=build /applis/web/target/*.jar /usr/local/lib/demo.jar
+#RUN chown  appuser:appuser /usr/local/lib/demo.jar
+#USER appuser
+ENTRYPOINT ["java","-jar","/applis/target/licences-nationales.jar"]
+#USER spring:spring
+#ENTRYPOINT ["java","-cp","applis:applis/lib/*","hello-abes-back"]
