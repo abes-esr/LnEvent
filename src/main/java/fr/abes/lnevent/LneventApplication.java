@@ -13,7 +13,7 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Collections;
 
 @SpringBootApplication
-public class LneventApplication extends SpringBootServletInitializer {
+public class LneventApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LneventApplication.class, args);
