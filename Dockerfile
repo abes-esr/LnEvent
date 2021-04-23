@@ -1,9 +1,10 @@
 FROM maven:3-jdk-11 as build
 WORKDIR /applis
 COPY pom.xml .
-COPY src ./
+COPY src ./src
 #RUN mvn -Dmaven.test.skip=true clean package
-RUN mvn -Dmaven.test.skip=true clean package spring-boot:repackage
+RUN mvn -Dmaven.test.skip=true clean package spring-boot:repackage -Dspring.profiles.active=docker
+#RUN mvn -Dmaven.test.skip=true clean package -Dspring.profiles.active=docker
 ##RUN mvn -f pom.xml clean package
 #RUN mkdir -p target/dependency && (cd target/dependency; jar -xf /applis/web/target/*.jar)
 
