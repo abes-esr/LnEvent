@@ -14,8 +14,8 @@ VOLUME /tmp
 ARG DEPENDENCY=/applis/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","fr/abes/lnevent/LneventApplication"]
+COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app/classes
+ENTRYPOINT ["java","-cp","app/classes:app/lib/*","fr/abes/lnevent/LneventApplication"]
 #ENTRYPOINT ["java","-cp","app:app/lib/*","fr/abes/lnevent/LneventApplication","--spring.profiles.active=docker"]
 #ENTRYPOINT ["/bin/bash"]
 ##COPY --from=build /applis/target/*.jar /applis/target/licences-nationales.jar
