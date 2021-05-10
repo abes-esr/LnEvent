@@ -10,7 +10,7 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf /applis/target/
 
 FROM openjdk:11 as back-server
 VOLUME /tmp
-#RUN apt install bash
+RUN apt install bash
 #RUN addgroup -S spring && adduser -S spring -G spring
 ARG DEPENDENCY=/applis/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
