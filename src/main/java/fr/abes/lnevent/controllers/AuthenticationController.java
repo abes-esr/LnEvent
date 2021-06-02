@@ -60,6 +60,10 @@ public class AuthenticationController {
         log.info("authenticateUser 3");
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, Long.toString(user.getId()), user.getUsername(), user.getNameEtab(), user.getIsAdmin()));
     }
+    @GetMapping("/fred")
+    String retourneFred() {
+    	return "fred est un dieu vivant";
+    }
 }
 
 
