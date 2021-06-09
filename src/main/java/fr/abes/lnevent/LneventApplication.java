@@ -25,7 +25,9 @@ public class LneventApplication {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         // *** URL below needs to match the Vue client URL and port ***
-        config.setAllowedOrigins(Collections.singletonList("*"));
+        config.setAllowedOrigins(Collections.singletonList("https://acces-docker.licencesnationales.fr"));
+        config.setAllowedOrigins(Collections.singletonList("https://robinier1-test.v202.abes.fr:8081"));
+        config.setAllowedOrigins(Collections.singletonList("https://robinier1-test.v202.abes.fr:8000"));
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);
