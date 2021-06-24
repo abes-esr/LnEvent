@@ -131,7 +131,7 @@ public class IpService {
             for (List<IpContains> listIpsContains : listAllIpContains) {
                 for (IpContains ipContains : listIpsContains) {
                     String nomEtab ="";
-                    //log.info("nomEtab = " + etablissementRepository.findEtablissementEntityByIpsContains(ipContains.getDBAcces()).getName());
+                    //log.info("nomEtab = " + etablissementRepository.findEtablissementEntityByIpsContains(ipContains.getDBAcces()).getName());//
                     try {
                         nomEtab = etablissementRepository.findEtablissementEntityByIpsContains(ipContains.getDBAcces()).getName();
                     }

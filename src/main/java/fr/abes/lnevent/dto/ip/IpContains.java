@@ -25,7 +25,6 @@ public class IpContains {
     private Integer contains;
     private EtablissementEntity etablissementEntity;
 
-
     public IpContains(IpEntity erreurAcces, IpEntity dbAcces, Integer contains) {
         this.erreurAcces = erreurAcces;
         this.dbAcces = dbAcces;
