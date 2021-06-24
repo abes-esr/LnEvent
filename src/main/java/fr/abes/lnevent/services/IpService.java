@@ -130,7 +130,14 @@ public class IpService {
 
             for (List<IpContains> listIpsContains : listAllIpContains) {
                 for (IpContains ipContains : listIpsContains) {
-                    String nomEtab = etablissementRepository.findEtablissementEntityByIpsContains(ipContains.getDBAcces()).getName();
+                    String nomEtab ="";
+                    //log.info("nomEtab = " + etablissementRepository.findEtablissementEntityByIpsContains(ipContains.getDBAcces()).getName());
+                    try {
+                        nomEtab = etablissementRepository.findEtablissementEntityByIpsContains(ipContains.getDBAcces()).getName();
+                    }
+                    catch (Exception e){
+                        log.info("données bdd incohérentes : l'ip est dans table ip mais pas dans la table Etab-IPS" + e);
+                    }
                     erreurMsg = ((ipContains.getErreurAcces().getTypeAcces().equals("ip")) ? "L'adresse IP" : "La plage d'adresses IP") + " '" + ipContains.getErreurAcces().getIp() + "' ";
                     log.info("erreurMsg = " + erreurMsg);
                     responseEntity = badRequest(erreurMsg);

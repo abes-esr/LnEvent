@@ -24,8 +24,7 @@ public class IpContains {
     private IpEntity dbAcces;
     private Integer contains;
     private EtablissementEntity etablissementEntity;
-    @Autowired
-    EtablissementRepository etablissementRepository;
+
 
     public IpContains(IpEntity erreurAcces, IpEntity dbAcces, Integer contains) {
         this.erreurAcces = erreurAcces;
