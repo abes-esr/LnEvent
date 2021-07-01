@@ -24,7 +24,7 @@ import javax.validation.Valid;
 
 
 @Slf4j
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://acces-docker.licencesnationales.fr")
 @RestController
 @RequestMapping("/")
 public class AuthenticationController {
