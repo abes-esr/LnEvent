@@ -33,7 +33,7 @@ import javax.validation.Valid;
 
 
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://acces-docker.licencesnationales.fr")
 @RestController
 @RequestMapping("/ln/reinitialisationMotDePasse")
 public class PasswordController {
